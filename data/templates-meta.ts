@@ -123,6 +123,18 @@ export const templatesMeta: TemplateMeta[] = [
     remixes: 42,
     accent: '#ec4899',
   },
+  {
+    id: 'template-11',
+    name: 'Liquid Glass',
+    description: 'Glass morphism hero with animated liquid background, floating phone mockup, and bento grid. Premium design for top producers.',
+    thumbnail: '/thumbnails/template-11.svg',
+    tier: 'pro',
+    tags: ['Glass', 'Animated', 'Premium'],
+    categories: ['new', 'pro'],
+    views: 120,
+    remixes: 8,
+    accent: '#6366f1',
+  },
 ]
 
 export const trending = templatesMeta.filter(t => t.categories.includes('trending'))

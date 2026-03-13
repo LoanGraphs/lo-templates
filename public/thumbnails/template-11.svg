@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="280" viewBox="0 0 200 280">
+  <defs>
+    <linearGradient id="bg11" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e0f2fe"/>
+      <stop offset="100%" stop-color="#f0e7ff"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="200" height="280" rx="12" fill="url(#bg11)"/>
+  <!-- Navbar pill -->
+  <rect x="20" y="12" width="160" height="16" rx="8" fill="white" opacity="0.8" stroke="white" stroke-width="0.5"/>
+  <rect x="28" y="17" width="30" height="5" rx="2" fill="#94a3b8"/>
+  <rect x="140" y="17" width="32" height="6" rx="3" fill="#1e293b"/>
+  <!-- Hero left: text bars -->
+  <rect x="16" y="50" width="60" height="3" rx="1" fill="#cbd5e1"/>
+  <rect x="16" y="60" width="80" height="8" rx="2" fill="#334155"/>
+  <rect x="16" y="72" width="75" height="8" rx="2" fill="#334155"/>
+  <rect x="16" y="88" width="65" height="4" rx="1" fill="#94a3b8"/>
+  <rect x="16" y="96" width="55" height="4" rx="1" fill="#94a3b8"/>
+  <!-- Hero buttons -->
+  <rect x="16" y="110" width="40" height="10" rx="5" fill="#1e293b"/>
+  <rect x="62" y="110" width="36" height="10" rx="5" fill="none" stroke="#94a3b8" stroke-width="1"/>
+  <!-- Hero right: phone -->
+  <rect x="120" y="42" width="60" height="100" rx="12" fill="#e2e8f0"/>
+  <rect x="124" y="46" width="52" height="92" rx="10" fill="white"/>
+  <rect x="140" y="49" width="20" height="6" rx="3" fill="#0f172a"/>
+  <!-- Phone inner cards -->
+  <rect x="130" y="60" width="40" height="18" rx="4" fill="#f1f5f9"/>
+  <rect x="130" y="82" width="40" height="18" rx="4" fill="#f1f5f9"/>
+  <rect x="130" y="104" width="40" height="14" rx="4" fill="#f1f5f9"/>
+  <!-- Lender marquee -->
+  <rect x="30" y="155" width="140" height="3" rx="1" fill="#cbd5e1" opacity="0.4"/>
+  <!-- Bento grid -->
+  <rect x="16" y="170" width="108" height="40" rx="8" fill="white" opacity="0.7" stroke="white" stroke-width="0.5"/>
+  <rect x="130" y="170" width="54" height="40" rx="8" fill="white" opacity="0.7" stroke="white" stroke-width="0.5"/>
+  <rect x="16" y="216" width="54" height="40" rx="8" fill="white" opacity="0.7" stroke="white" stroke-width="0.5"/>
+  <rect x="76" y="216" width="108" height="40" rx="8" fill="white" opacity="0.7" stroke="white" stroke-width="0.5"/>
+  <!-- Decorative blobs -->
+  <circle cx="30" cy="30" r="30" fill="#93c5fd" opacity="0.15"/>
+  <circle cx="170" cy="140" r="25" fill="#c4b5fd" opacity="0.12"/>
+  <circle cx="100" cy="260" r="20" fill="#a7f3d0" opacity="0.1"/>
+</svg>

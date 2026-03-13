@@ -8,6 +8,7 @@ import * as template7 from './template-7'
 import * as template8 from './template-8'
 import * as template9 from './template-9'
 import * as template10 from './template-10'
+import * as template11 from './template-11'
 import * as templateClassic from './template-classic'
 import * as templateModern from './template-modern'
 import * as templateBold from './template-bold'
@@ -33,6 +34,7 @@ export const templates: Record<string, TemplateEntry> = {
   'template-8': template8,
   'template-9': template9,
   'template-10': template10,
+  'template-11': template11,
   'template-classic': templateClassic,
   'template-modern': templateModern,
   'template-bold': templateBold,
