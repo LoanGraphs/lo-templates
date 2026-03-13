@@ -3,105 +3,286 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
-import { templatesMeta, trending, freeTemplates, proTemplates, newTemplates, type TemplateMeta } from '@/data/templates-meta'
+import {
+  templatesMeta,
+  trending,
+  freeTemplates,
+  proTemplates,
+  newTemplates,
+  type TemplateMeta,
+} from '@/data/templates-meta'
 
-// ─── Template Card ────────────────────────────────────────────────────────────
-function TemplateCard({ template }: { template: TemplateMeta }) {
-  const [hovered, setHovered] = useState(false)
-
+/* ─── Navbar ──────────────────────────────────────────────────────────────── */
+function Navbar() {
   return (
-    <Link
-      href={`/${template.id}/loan-officer`}
-      className="group block flex-shrink-0 w-72"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {/* Preview image */}
-      <div
-        className="relative overflow-hidden rounded-xl mb-3 bg-gray-900"
-        style={{
-          height: '180px',
-          boxShadow: hovered ? `0 0 0 2px ${template.accent}, 0 8px 32px rgba(0,0,0,0.4)` : '0 2px 12px rgba(0,0,0,0.2)',
-          transition: 'box-shadow 0.2s ease',
-        }}
-      >
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
+      <div className="flex items-center justify-between px-6 md:px-12 h-12 max-w-[1400px] mx-auto">
+        {/* Left: Logo */}
+        <Link href="/" className="flex items-center gap-2">
+          <div className="w-6 h-6 bg-black rounded flex items-center justify-center text-[9px] font-bold text-white">
+            LG
+          </div>
+          <span className="text-sm font-semibold text-gray-900 tracking-tight hidden sm:inline">
+            LoanGraphs
+          </span>
+        </Link>
+
+        {/* Center: Nav links */}
+        <div className="hidden md:flex items-center gap-8 text-[11px] font-medium tracking-[0.08em] text-gray-500 uppercase">
+          <Link href="/" className="hover:text-gray-900 transition-colors">
+            Templates
+          </Link>
+          <a
+            href="https://loangraphs.com/pricing"
+            className="hover:text-gray-900 transition-colors"
+          >
+            Pricing
+          </a>
+          <a
+            href="https://loangraphs.com/docs"
+            className="hover:text-gray-900 transition-colors"
+          >
+            Docs
+          </a>
+        </div>
+
+        {/* Right: Sign in */}
+        <div className="flex items-center gap-4">
+          <a
+            href="https://loangraphs.com/login"
+            className="text-[11px] font-medium tracking-[0.08em] text-gray-500 uppercase hover:text-gray-900 transition-colors"
+          >
+            Sign In
+          </a>
+        </div>
+      </div>
+    </nav>
+  )
+}
+
+/* ─── Hero ─────────────────────────────────────────────────────────────────── */
+function Hero({
+  search,
+  setSearch,
+}: {
+  search: string
+  setSearch: (v: string) => void
+}) {
+  return (
+    <section className="pt-28 pb-14 px-6 text-center">
+      {/* Pill badge */}
+      <div className="inline-flex items-center gap-2 border border-gray-200 rounded-full px-4 py-1.5 text-xs text-gray-600 mb-6 bg-white">
+        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+        9 mortgage-focused templates — built for LOs
+      </div>
+
+      {/* Heading */}
+      <h1 className="text-4xl md:text-5xl lg:text-[56px] font-bold text-gray-900 mb-4 leading-[1.1] tracking-tight">
+        Professional LO websites, instantly
+      </h1>
+
+      {/* Subtext */}
+      <p className="text-gray-400 text-sm md:text-base mb-8 max-w-lg mx-auto">
+        Browse 9 mortgage-focused templates. Pick one and go live with LoanGraphs.
+      </p>
+
+      {/* Prompt input bar (Aura style) */}
+      <div className="max-w-2xl mx-auto">
+        <div className="border border-gray-200 rounded-xl bg-white overflow-hidden">
+          {/* Input area */}
+          <div className="px-4 pt-4 pb-3">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Describe your ideal LO website..."
+              className="w-full text-sm text-gray-900 placeholder-gray-400 outline-none bg-transparent"
+            />
+          </div>
+          {/* Bottom toolbar */}
+          <div className="flex items-center justify-between px-4 py-2.5 border-t border-gray-100">
+            <div className="flex items-center gap-3">
+              <span className="text-[11px] font-medium text-gray-500 flex items-center gap-1.5">
+                <svg
+                  className="w-3.5 h-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"
+                  />
+                </svg>
+                AI Builder
+              </span>
+              <span className="text-[11px] text-gray-400 bg-gray-50 border border-gray-200 rounded px-2 py-0.5 flex items-center gap-1">
+                <svg
+                  className="w-3 h-3"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25z"
+                  />
+                </svg>
+                GPT-5 ▾
+              </span>
+              {/* Icon buttons */}
+              <button className="text-gray-400 hover:text-gray-600 transition-colors">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5"
+                  />
+                </svg>
+              </button>
+              <button className="text-gray-400 hover:text-gray-600 transition-colors">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13"
+                  />
+                </svg>
+              </button>
+            </div>
+            {/* Submit arrow */}
+            <button className="w-7 h-7 bg-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors">
+              <svg
+                className="w-3.5 h-3.5 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─── Template Card (Aura style) ──────────────────────────────────────────── */
+function TemplateCard({ template }: { template: TemplateMeta }) {
+  return (
+    <Link href={`/${template.id}/loan-officer`} className="group block">
+      {/* Tall portrait image */}
+      <div className="relative overflow-hidden rounded-sm bg-gray-50 aspect-[3/4] mb-3">
         <Image
           src={template.thumbnail}
           alt={template.name}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
         />
-        {/* Tier badge */}
-        <div className={`absolute top-3 left-3 text-[10px] font-semibold tracking-widest uppercase px-2 py-0.5 rounded-full ${
-          template.tier === 'free'
-            ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-            : 'bg-violet-500/20 text-violet-300 border border-violet-500/30'
-        }`}>
-          {template.tier === 'free' ? 'Free' : 'Pro'}
-        </div>
-        {/* Hover overlay */}
-        <div className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-200 ${hovered ? 'opacity-100' : 'opacity-0'}`}>
-          <span className="bg-white text-gray-900 text-xs font-semibold px-4 py-2 rounded-full">
-            Preview Template →
-          </span>
+        {/* Price badge (top-right corner) */}
+        <div className="absolute top-2.5 right-2.5 text-[10px] font-semibold bg-white/90 backdrop-blur-sm text-gray-700 px-2 py-0.5 rounded">
+          {template.tier === 'free' ? 'Free' : '$29/mo'}
         </div>
       </div>
 
-      {/* Card info */}
-      <div>
-        <div className="flex items-start justify-between mb-1">
-          <h3 className="text-sm font-medium text-gray-100 group-hover:text-white transition-colors">{template.name}</h3>
+      {/* Template name */}
+      <h3 className="text-[13px] font-medium text-gray-900 mb-1.5 truncate">
+        {template.name}
+      </h3>
+
+      {/* Author row */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-1.5">
+          {/* LG avatar */}
+          <div className="w-4 h-4 bg-black rounded-full flex items-center justify-center">
+            <span className="text-[6px] font-bold text-white leading-none">LG</span>
+          </div>
+          <span className="text-[11px] text-gray-400">LoanGraphs</span>
         </div>
-        <p className="text-xs text-gray-500 mb-2 line-clamp-1">{template.description}</p>
-        <div className="flex items-center gap-3 text-xs text-gray-600">
-          <span className="flex items-center gap-1">
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+
+        {/* Stats: remixes + views */}
+        <div className="flex items-center gap-2.5 text-[11px] text-gray-400">
+          <span className="flex items-center gap-0.5">
+            <svg
+              className="w-3 h-3"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              />
+            </svg>
+            {template.remixes.toLocaleString()}
+          </span>
+          <span className="flex items-center gap-0.5">
+            <svg
+              className="w-3 h-3"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+              />
             </svg>
             {template.views.toLocaleString()}
           </span>
-          <span className="flex items-center gap-1">
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
-            {template.remixes}
-          </span>
-          <div className="flex gap-1 ml-auto">
-            {template.tags.slice(0, 2).map(tag => (
-              <span key={tag} className="bg-gray-800 text-gray-400 text-[10px] px-1.5 py-0.5 rounded">
-                {tag}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
     </Link>
   )
 }
 
-// ─── Section Row ─────────────────────────────────────────────────────────────
+/* ─── Section (3-col grid) ─────────────────────────────────────────────────── */
 function TemplateSection({
   title,
   templates,
-  browseHref,
 }: {
   title: string
   templates: TemplateMeta[]
-  browseHref?: string
 }) {
   return (
-    <section className="mb-12">
-      <div className="flex items-center justify-between mb-5 px-6 md:px-12">
-        <h2 className="text-sm font-semibold text-gray-200 tracking-wide">{title}</h2>
-        {browseHref && (
-          <Link href={browseHref} className="text-xs text-gray-500 hover:text-gray-300 transition-colors flex items-center gap-1">
-            Browse {title} <span>→</span>
-          </Link>
-        )}
+    <section className="mb-16 max-w-[1200px] mx-auto px-6 md:px-12">
+      {/* Section header */}
+      <div className="flex items-center justify-between mb-6 border-t border-gray-100 pt-8">
+        <h2 className="text-sm font-semibold text-gray-900">{title}</h2>
+        <span className="text-xs text-gray-400 hover:text-gray-600 transition-colors cursor-pointer">
+          Browse {title} →
+        </span>
       </div>
-      <div className="px-6 md:px-12 flex gap-5 overflow-x-auto pb-4 scrollbar-hide">
-        {templates.map(t => (
+
+      {/* 3-column grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {templates.map((t) => (
           <TemplateCard key={t.id} template={t} />
         ))}
       </div>
@@ -109,178 +290,197 @@ function TemplateSection({
   )
 }
 
-// ─── Search Bar ───────────────────────────────────────────────────────────────
-function SearchBar({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+/* ─── Footer (Aura style — 4-column links) ─────────────────────────────────── */
+function Footer() {
   return (
-    <div className="relative max-w-2xl mx-auto">
-      <div className="flex items-center gap-3 bg-gray-800/80 border border-gray-700 rounded-xl px-4 py-3 focus-within:border-gray-500 transition-colors">
-        <svg className="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-        <input
-          type="text"
-          value={value}
-          onChange={e => onChange(e.target.value)}
-          placeholder="Search templates — e.g. 'dark', 'minimal', 'lead gen'..."
-          className="flex-1 bg-transparent text-sm text-gray-200 placeholder-gray-600 outline-none"
-        />
-        {value && (
-          <button onClick={() => onChange('')} className="text-gray-600 hover:text-gray-400 transition-colors">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        )}
+    <footer className="border-t border-gray-100 mt-10">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12 py-14">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+          {/* Brand column */}
+          <div className="col-span-2 md:col-span-1">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-6 h-6 bg-black rounded flex items-center justify-center text-[9px] font-bold text-white">
+                LG
+              </div>
+            </div>
+            <p className="text-[11px] text-gray-400 leading-relaxed max-w-[200px]">
+              Professional LO website templates. No design skills needed. Go live instantly with LoanGraphs.
+            </p>
+          </div>
+
+          {/* Product */}
+          <div>
+            <h4 className="text-[11px] font-semibold text-gray-500 uppercase tracking-[0.08em] mb-4">
+              Product
+            </h4>
+            <ul className="space-y-2.5 text-[12px] text-gray-400">
+              <li>
+                <Link href="/" className="hover:text-gray-600 transition-colors">
+                  Templates
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="https://loangraphs.com/pricing"
+                  className="hover:text-gray-600 transition-colors"
+                >
+                  Pricing
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://loangraphs.com/docs"
+                  className="hover:text-gray-600 transition-colors"
+                >
+                  Docs
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <h4 className="text-[11px] font-semibold text-gray-500 uppercase tracking-[0.08em] mb-4">
+              Resources
+            </h4>
+            <ul className="space-y-2.5 text-[12px] text-gray-400">
+              <li>
+                <a href="#" className="hover:text-gray-600 transition-colors">
+                  Getting Started
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-gray-600 transition-colors">
+                  Customization
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-gray-600 transition-colors">
+                  FAQ
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* What We Use */}
+          <div>
+            <h4 className="text-[11px] font-semibold text-gray-500 uppercase tracking-[0.08em] mb-4">
+              Built With
+            </h4>
+            <ul className="space-y-2.5 text-[12px] text-gray-400">
+              <li>
+                <span>Next.js</span>
+              </li>
+              <li>
+                <span>Tailwind CSS</span>
+              </li>
+              <li>
+                <span>Vercel</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Connect */}
+          <div>
+            <h4 className="text-[11px] font-semibold text-gray-500 uppercase tracking-[0.08em] mb-4">
+              Connect
+            </h4>
+            <ul className="space-y-2.5 text-[12px] text-gray-400">
+              <li>
+                <a href="#" className="hover:text-gray-600 transition-colors">
+                  Support
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-gray-600 transition-colors">
+                  Privacy
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-gray-600 transition-colors">
+                  Terms
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="border-t border-gray-100 mt-10 pt-6 flex items-center justify-between">
+          <p className="text-[11px] text-gray-400">
+            © {new Date().getFullYear()} LoanGraphs. All rights reserved.
+          </p>
+          <div className="flex items-center gap-3">
+            <a
+              href="https://loangraphs.com"
+              className="text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1 17.93A8.005 8.005 0 014 12c0-.34.028-.674.07-1.003L8 14.93V16a2 2 0 002 2v1.93zm6.54-2.47A1.994 1.994 0 0016 16h-1v-3a1 1 0 00-1-1H8v-2h2a1 1 0 001-1V7h2a2 2 0 002-2v-.41A7.997 7.997 0 0120 12a7.98 7.98 0 01-2.46 5.46z" />
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
-      <div className="flex items-center gap-3 mt-3 justify-center">
-        {['Dark', 'Minimal', 'Lead Gen', 'Bold', 'Elegant', 'Corporate'].map(tag => (
-          <button
-            key={tag}
-            onClick={() => onChange(tag.toLowerCase())}
-            className="text-[11px] text-gray-500 hover:text-gray-300 bg-gray-800/60 hover:bg-gray-700/60 border border-gray-700/60 px-3 py-1 rounded-full transition-all"
-          >
-            {tag}
-          </button>
-        ))}
-      </div>
-    </div>
+    </footer>
   )
 }
 
-// ─── Main Page ────────────────────────────────────────────────────────────────
+/* ─── Main Page ────────────────────────────────────────────────────────────── */
 export default function HomePage() {
   const [search, setSearch] = useState('')
 
   const filtered = search
-    ? templatesMeta.filter(t =>
-        t.name.toLowerCase().includes(search.toLowerCase()) ||
-        t.description.toLowerCase().includes(search.toLowerCase()) ||
-        t.tags.some(tag => tag.toLowerCase().includes(search.toLowerCase()))
+    ? templatesMeta.filter(
+        (t) =>
+          t.name.toLowerCase().includes(search.toLowerCase()) ||
+          t.description.toLowerCase().includes(search.toLowerCase()) ||
+          t.tags.some((tag) =>
+            tag.toLowerCase().includes(search.toLowerCase())
+          )
       )
     : null
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] text-gray-100">
-      {/* ── Navbar ── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0d0d0d]/90 backdrop-blur-md border-b border-gray-800/60">
-        <div className="flex items-center justify-between px-6 md:px-12 h-14">
-          <div className="flex items-center gap-8">
-            <Link href="/" className="text-white font-semibold text-sm tracking-tight flex items-center gap-2">
-              <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center text-[10px] font-bold">LG</div>
-              LoanGraphs
-            </Link>
-            <div className="hidden md:flex items-center gap-6 text-xs text-gray-500">
-              <Link href="/" className="hover:text-gray-200 transition-colors">Templates</Link>
-              <a href="https://loangraphs.com/pricing" className="hover:text-gray-200 transition-colors">Pricing</a>
-              <a href="https://loangraphs.com/docs" className="hover:text-gray-200 transition-colors">Docs</a>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <a
-              href="https://loangraphs.com/login"
-              className="text-xs text-gray-400 hover:text-white transition-colors"
-            >
-              Sign in
-            </a>
-            <a
-              href="https://loangraphs.com/signup"
-              className="text-xs bg-white text-gray-900 font-medium px-4 py-1.5 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              Get started free
-            </a>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-white text-gray-900">
+      <Navbar />
+      <Hero search={search} setSearch={setSearch} />
 
-      {/* ── Hero ── */}
-      <section className="pt-32 pb-16 px-6 text-center">
-        <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-3 py-1 text-xs text-blue-400 mb-6">
-          <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
-          9 LO-specific templates — built for mortgage pros
-        </div>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight tracking-tight">
-          Your professional LO website,<br />
-          <span className="text-gray-500">ready in minutes</span>
-        </h1>
-        <p className="text-gray-500 text-base md:text-lg mb-10 max-w-xl mx-auto">
-          Browse mortgage-focused templates. Pick one, preview it with your name, and go live with LoanGraphs.
-        </p>
-        <SearchBar value={search} onChange={setSearch} />
-      </section>
-
-      {/* ── Search Results ── */}
+      {/* Search results */}
       {filtered !== null && (
-        <section className="px-6 md:px-12 mb-12">
-          <p className="text-xs text-gray-500 mb-5">
-            {filtered.length} result{filtered.length !== 1 ? 's' : ''} for &ldquo;{search}&rdquo;
+        <section className="max-w-[1200px] mx-auto px-6 md:px-12 mb-16">
+          <p className="text-xs text-gray-400 mb-6">
+            {filtered.length} result{filtered.length !== 1 ? 's' : ''} for
+            &ldquo;{search}&rdquo;
           </p>
-          <div className="flex flex-wrap gap-5">
-            {filtered.length === 0 ? (
-              <p className="text-gray-600 text-sm">No templates match that search. Try &ldquo;dark&rdquo;, &ldquo;bold&rdquo;, or &ldquo;minimal&rdquo;.</p>
-            ) : (
-              filtered.map(t => <TemplateCard key={t.id} template={t} />)
-            )}
-          </div>
+          {filtered.length === 0 ? (
+            <p className="text-gray-400 text-sm">
+              No templates match that search. Try &ldquo;dark&rdquo;,
+              &ldquo;bold&rdquo;, or &ldquo;minimal&rdquo;.
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filtered.map((t) => (
+                <TemplateCard key={t.id} template={t} />
+              ))}
+            </div>
+          )}
         </section>
       )}
 
-      {/* ── Sections (hidden when searching) ── */}
+      {/* Sections (hidden when searching) */}
       {filtered === null && (
         <>
-          <TemplateSection title="Trending" templates={trending} browseHref="/?filter=trending" />
-          <TemplateSection title="Free Templates" templates={freeTemplates} browseHref="/?filter=free" />
-          <TemplateSection title="Pro Templates" templates={proTemplates} browseHref="/?filter=pro" />
+          <TemplateSection title="Trending" templates={trending} />
+          <TemplateSection title="Free Templates" templates={freeTemplates} />
+          <TemplateSection title="Pro Templates" templates={proTemplates} />
           {newTemplates.length > 0 && (
-            <TemplateSection title="New" templates={newTemplates} browseHref="/?filter=new" />
+            <TemplateSection title="New" templates={newTemplates} />
           )}
         </>
       )}
 
-      {/* ── Stats bar ── */}
-      <section className="border-t border-gray-800/60 py-14 px-6 md:px-12 mt-8">
-        <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {[
-            { value: '9', label: 'Templates' },
-            { value: '3', label: 'Free' },
-            { value: '6', label: 'Pro' },
-            { value: '100%', label: 'Mortgage-Focused' },
-          ].map(s => (
-            <div key={s.label}>
-              <div className="text-3xl font-bold text-white mb-1">{s.value}</div>
-              <div className="text-xs text-gray-600 uppercase tracking-widest">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <section className="py-20 px-6 text-center">
-        <div className="max-w-xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-4">Ready to go live?</h2>
-          <p className="text-gray-500 mb-8 text-sm leading-relaxed">
-            Sign up free — pick a template, add your info, and your professional LO website goes live instantly.
-          </p>
-          <a
-            href="https://loangraphs.com/signup"
-            className="inline-block bg-white text-gray-900 font-semibold px-8 py-3 rounded-xl hover:bg-gray-100 transition-colors"
-          >
-            Get started free →
-          </a>
-          <p className="text-xs text-gray-700 mt-4">No credit card required · Free tier includes 5,000 monthly visitors</p>
-        </div>
-      </section>
-
-      {/* ── Footer ── */}
-      <footer className="border-t border-gray-800/60 py-10 px-6 md:px-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-xs text-gray-700">© {new Date().getFullYear()} LoanGraphs. All rights reserved.</div>
-          <div className="flex gap-6 text-xs text-gray-700">
-            <a href="https://loangraphs.com" className="hover:text-gray-400 transition-colors">loangraphs.com</a>
-            <a href="#" className="hover:text-gray-400 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-gray-400 transition-colors">Terms</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
