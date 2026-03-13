@@ -15,6 +15,7 @@ export interface FormData {
   subdomain: string
   licenseStates: string[]
   agreedToTerms: boolean
+  primaryColor: string
 }
 
 export default function CreateWizard() {
@@ -29,6 +30,7 @@ export default function CreateWizard() {
     subdomain: '',
     licenseStates: [],
     agreedToTerms: false,
+    primaryColor: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -42,8 +44,7 @@ export default function CreateWizard() {
 
   const handleSubmit = async () => {
     setIsSubmitting(true)
-    // Fake loading for 1.5s
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    // Advance to step 3; StepDone will call the API on mount
     setIsSubmitting(false)
     setStep(3)
   }
@@ -100,7 +101,20 @@ export default function CreateWizard() {
             />
           )}
 
-          {step === 3 && <StepDone subdomain={formData.subdomain} />}
+          {step === 3 && (
+            <StepDone
+              subdomain={formData.subdomain}
+              templateSlug={selectedTemplate}
+              formData={{
+                name: `${formData.firstName} ${formData.lastName}`.trim(),
+                email: formData.email,
+                nmls: formData.nmls,
+                phone: formData.phone,
+                states: formData.licenseStates,
+                primaryColor: formData.primaryColor,
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
