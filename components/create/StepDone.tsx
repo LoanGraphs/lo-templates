@@ -8,7 +8,7 @@ interface StepDoneProps {
 
 export default function StepDone({ subdomain }: StepDoneProps) {
   const [copied, setCopied] = useState(false)
-  const siteUrl = `https://${subdomain}.loangraphs.com`
+  const siteUrl = `https://${subdomain}.sites.loangraphs.com`
 
   const handleCopy = () => {
     navigator.clipboard.writeText(siteUrl)
