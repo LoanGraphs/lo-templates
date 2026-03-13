@@ -161,12 +161,12 @@ export default function StepYourInfo({
               placeholder="john-martinez"
             />
             <span className="flex items-center px-4 bg-slate-50 border border-slate-200 rounded-r-xl text-slate-500 text-sm">
-.sites.loangraphs.com
+.loangraphs.me
             </span>
           </div>
           {formData.subdomain && (
             <p className="text-sm text-green-600 mt-1.5">
-              ✓ {formData.subdomain}.sites.loangraphs.com is available
+              ✓ {formData.subdomain}.loangraphs.me is available
             </p>
           )}
         </div>
