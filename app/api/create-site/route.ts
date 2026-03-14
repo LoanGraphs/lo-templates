@@ -1,30 +1,11 @@
 import { NextResponse } from 'next/server'
 import { registerLO, createLandingPage, setLandingPage, setBasicInfo } from '@/lib/loangraphs-client'
 
-// Laravel template IDs — verified via GET /api/user/website/templates (2026-03-13)
-// 1=Minimalist, 2=Creative, 3=Dynamic, 4=DSCR
-// Only 4 templates in Laravel currently — new lo-templates designs pending backend seeding
 const TEMPLATE_IDS: Record<string, number> = {
-  // lo-templates gallery slugs → nearest Laravel template
-  'template-1': 2,   // Modern Dark → Creative
-  'template-2': 1,   // Classic Pro → Minimalist
-  'template-3': 1,   // Minimal Clean → Minimalist
-  'template-4': 3,   // Corporate Plus → Dynamic
-  'template-5': 3,   // Dynamic Blue → Dynamic
-  'template-6': 1,   // Elegant White → Minimalist
-  'template-7': 3,   // Bold Orange → Dynamic
-  'template-8': 2,   // Nathan Pro → Creative
-  'template-9': 3,   // Horizon → Dynamic
-  'template-10': 2,  // (future)
-  'template-11': 2,  // Liquid Glass → Creative
-  // lo-react-template theme slugs
-  prestige: 1,
-  'local-hero': 2,
-  'modern-edge': 3,
-  'trust-builder': 1,
-  'team-page': 2,
-  // DSCR-focused templates
-  dscr: 4,
+  'template-1': 1, 'template-2': 2, 'template-3': 3, 'template-4': 4,
+  'template-5': 5, 'template-6': 6, 'template-7': 7, 'template-8': 8,
+  'template-9': 9, 'template-10': 10, 'template-11': 11,
+  prestige: 1, 'local-hero': 2, 'modern-edge': 3, 'trust-builder': 4, 'team-page': 5, dscr: 4,
 }
 
 export async function POST(req: Request) {
