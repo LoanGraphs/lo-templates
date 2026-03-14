@@ -1,4 +1,4 @@
-const API_BASE = 'https://api.loangraphs.com'
+const API_BASE = 'https://api.loangraphs.com/api'
 
 export async function registerLO(payload: {
   name: string
